@@ -7,15 +7,14 @@ import os
 
 def fill_missing_values(df_data):
     """Fill missing values in data frame, in place."""
-    ##########################################################
-    pass  # TODO: Your code here (DO NOT modify anything else)
-    ##########################################################
-
+    # Forward fill missing values
+    df_data.ffill(inplace=True)
+    # Backward fill any remaining missing values
+    df_data.bfill(inplace=True)
 
 def symbol_to_path(symbol, base_dir="data"):
     """Return CSV file path given ticker symbol."""
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
-
 
 def get_data(symbols, dates):
     """Read stock data (adjusted close) for given symbols from CSV files."""
@@ -34,14 +33,12 @@ def get_data(symbols, dates):
 
     return df_final
 
-
 def plot_data(df_data):
     """Plot stock data with appropriate axis labels."""
-    ax = df_data.plot(title="Stock Data", fontsize=2)
+    ax = df_data.plot(title="Stock Data", fontsize=12)
     ax.set_xlabel("Date")
     ax.set_ylabel("Price")
     plt.show()
-
 
 def test_run():
     """Function called by Test Run."""
